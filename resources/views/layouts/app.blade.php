@@ -19,6 +19,7 @@
     @endif
     
     <div class="container">
+        @include('inc.messege')
         <div class="row">
             <div class="col-8">
                 @yield('content')

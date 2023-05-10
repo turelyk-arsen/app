@@ -10,15 +10,7 @@
         dolor quis aspernatur aperiam et totam maiores optio, deleniti earum perferendis. Voluptatum soluta reiciendis
         corrupti? Laborum molestias magnam nulla eligendi iure accusamus rem est?</p>
 
-    @if ($errors->any)
-        <div class="alert alert-danger">
-            <ul>
-                @foreach ($errors->all() as $erorr)
-                    <li>{{ $erorr }}</li>
-                @endforeach
-            </ul>
-        </div>
-    @endif
+
 
     <form action="{{ route('contact-form') }}" method="post">
         @csrf
