@@ -33,9 +33,37 @@ class ContactController extends Controller
     //     return view('messages', ['data' => Contact::all()]);
     // }
     public function allData()
-{
-    return view('messages', ['data' => Contact::orderByDesc('id')->take(2)->get()]);
-    // return view('messages', ['data' => Contact::where('subject','=','hello !!!')->get()]);
-}
+    {
+        return view('messages', ['data' => Contact::orderByDesc('id')->take(2)->get()]);
+        // return view('messages', ['data' => Contact::where('subject','=','hello !!!')->get()]);
+    }
 
+    public function showOneMessage($id)
+    {
+        return view('one-message', ['data' => Contact::find($id)]);
+    }
+
+    public function updateMessage($id)
+    {
+        return view('update-message', ['data' => Contact::find($id)]);
+    }
+
+    public function updateMessageSubmit($id, ContactRequest $req)
+    {
+        $contact = Contact::find($id);
+        $contact->name = $req->input('name');
+        $contact->email = $req->input('email');
+        $contact->subject = $req->input('subject');
+        $contact->message = $req->input('message');
+
+        $contact->save();
+
+        return redirect()->route('contact-data-one', $id)->with('success', 'Message update');
+    }
+
+    public function deleteMessage($id)
+    {
+        Contact::find($id)->delete();
+        return redirect()->route('contact-data')->with('success', 'Message delete');
+    }
 }
