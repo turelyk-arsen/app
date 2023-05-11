@@ -9,7 +9,8 @@ use App\Models\Contact;
 
 class ContactController extends Controller
 {
-    public function submit (ContactRequest $req) {
+    public function submit(ContactRequest $req)
+    {
         // return 'Okey';
         // dd($req->input('subject'));
         // $validation = $req->validate([
@@ -24,6 +25,17 @@ class ContactController extends Controller
 
         $contact->save();
 
-        return redirect()->route('home')->with('success','Message was sent');
+        return redirect()->route('home')->with('success', 'Message was sent');
     }
+
+    // public function allData()
+    // {
+    //     return view('messages', ['data' => Contact::all()]);
+    // }
+    public function allData()
+{
+    return view('messages', ['data' => Contact::orderByDesc('id')->take(2)->get()]);
+    // return view('messages', ['data' => Contact::where('subject','=','hello !!!')->get()]);
+}
+
 }
